@@ -1,0 +1,65 @@
+<resources>
+
+    <!-- Shapes -->
+    <style name="ShapeAppearance.Vidcollage.Circle" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="ShapeAppearance.Vidcollage.Squircle" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">18dp</item>
+    </style>
+
+    <style name="ShapeAppearance.Vidcollage.Collage" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+    </style>
+
+    <!-- Cards -->
+    <style name="Widget.Vidcollage.Card" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardCornerRadius">24dp</item>
+        <item name="cardElevation">2dp</item>
+        <item name="cardBackgroundColor">?attr/colorSurfaceContainer</item>
+    </style>
+
+    <!-- One number-and-label pair in the result card header. -->
+    <style name="Widget.Vidcollage.StatChip" parent="Widget.Material3.Chip.Assist">
+        <item name="android:clickable">false</item>
+        <item name="android:focusable">false</item>
+        <item name="android:checkable">false</item>
+        <item name="chipIconTint">?attr/colorPrimary</item>
+        <item name="chipIconSize">16dp</item>
+        <item name="chipBackgroundColor">?attr/colorSurfaceContainerHigh</item>
+        <item name="chipStrokeColor">?attr/colorOutlineVariant</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="ensureMinTouchTargetSize">false</item>
+        <item name="android:textColor">?attr/colorOnSurfaceVariant</item>
+    </style>
+
+    <!-- Text on the gradient hero, which has its own fixed on-colour. -->
+    <style name="TextAppearance.Vidcollage.HeroTitle" parent="TextAppearance.Material3.HeadlineMedium">
+        <item name="android:textColor">@color/hero_on_gradient</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:letterSpacing">-0.02</item>
+    </style>
+
+    <style name="TextAppearance.Vidcollage.HeroBody" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:textColor">@color/hero_on_gradient_muted</item>
+        <item name="android:lineSpacingMultiplier">1.15</item>
+    </style>
+
+    <style name="Widget.Vidcollage.Button.Hero" parent="Widget.Material3.Button">
+        <item name="android:textAppearance">?attr/textAppearanceLabelLarge</item>
+        <item name="backgroundTint">@color/hero_on_gradient</item>
+        <item name="android:textColor">@color/brand_primary</item>
+        <item name="iconTint">@color/brand_primary</item>
+        <item name="rippleColor">#33000000</item>
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:paddingBottom">16dp</item>
+        <item name="cornerRadius">18dp</item>
+        <item name="elevation">4dp</item>
+        <item name="iconGravity">textStart</item>
+        <item name="iconPadding">10dp</item>
+    </style>
+</resources>

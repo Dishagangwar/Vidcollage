@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/resultCard"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="6dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginBottom="10dp"
+    app:cardCornerRadius="24dp"
+    app:cardElevation="2dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/videoThumb"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@drawable/bg_thumb_tile"
+                android:contentDescription="@string/collage_preview"
+                android:scaleType="centerCrop"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.Vidcollage.Squircle" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/videoName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="middle"
+                    android:singleLine="true"
+                    android:textAppearance="?attr/textAppearanceTitleMedium"
+                    tools:text="sample_1.mp4" />
+
+                <TextView
+                    android:id="@+id/videoDuration"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:drawablePadding="4dp"
+                    android:gravity="center_vertical"
+                    android:textAppearance="?attr/textAppearanceBodySmall"
+                    android:textColor="?android:attr/textColorSecondary"
+                    app:drawableStartCompat="@drawable/ic_schedule"
+                    app:drawableTint="?android:attr/textColorSecondary"
+                    tools:text="0:42" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- A ChipGroup rather than a scrolling row: the stats wrap onto a second line on
+             narrow screens instead of being cut off at the card edge. -->
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/statGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:chipSpacingHorizontal="6dp"
+            app:chipSpacingVertical="0dp">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/peopleStat"
+                style="@style/Widget.Vidcollage.StatChip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:chipIcon="@drawable/ic_people"
+                tools:text="5 people" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/appearanceStat"
+                style="@style/Widget.Vidcollage.StatChip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:chipIcon="@drawable/ic_face"
+                tools:text="20 appearances" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/framesStat"
+                style="@style/Widget.Vidcollage.StatChip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:chipIcon="@drawable/ic_grid"
+                tools:text="150 frames" />
+        </com.google.android.material.chip.ChipGroup>
+
+        <TextView
+            android:id="@+id/peopleHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:text="@string/people_header"
+            android:textAppearance="?attr/textAppearanceLabelLarge"
+            android:textColor="?android:attr/textColorSecondary" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/peopleList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:paddingEnd="8dp"
+            android:scrollbars="none"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_person" />
+
+        <!-- Tapping the collage opens the full-screen preview. -->
+        <FrameLayout
+            android:id="@+id/collageFrame"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_collage_stage"
+            android:foreground="?attr/selectableItemBackground"
+            android:padding="14dp">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/collageImage"
+                android:layout_width="match_parent"
+                android:layout_height="380dp"
+                android:contentDescription="@string/collage_preview"
+                android:scaleType="fitCenter"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.Vidcollage.Collage"
+                tools:src="@tools:sample/backgrounds/scenic" />
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="top|end"
+                android:layout_margin="4dp"
+                android:background="@drawable/bg_hero_chip"
+                android:contentDescription="@null"
+                android:padding="7dp"
+                android:src="@drawable/ic_expand"
+                app:tint="@color/white" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/saveButton"
+                style="@style/Widget.Material3.Button.TonalButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/save_to_gallery"
+                app:icon="@drawable/ic_download"
+                app:iconGravity="textStart" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/shareButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:text="@string/share"
+                app:icon="@drawable/ic_share"
+                app:iconGravity="textStart" />
+        </LinearLayout>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

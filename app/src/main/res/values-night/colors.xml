@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Dimmer stops so the hero does not glow against a dark surface. -->
+    <color name="hero_gradient_start">#FF4527B0</color>
+    <color name="hero_gradient_center">#FF5B2E9E</color>
+    <color name="hero_gradient_end">#FF8D2453</color>
+    <color name="hero_on_gradient">#FFF6EDFF</color>
+    <color name="hero_on_gradient_muted">#B3F6EDFF</color>
+    <color name="hero_scrim">#4D000000</color>
+</resources>

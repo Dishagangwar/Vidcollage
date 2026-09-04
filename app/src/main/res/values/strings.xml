@@ -1,0 +1,54 @@
+<resources>
+    <string name="app_name">VidCollage</string>
+    <string name="tagline">Finds every unique person in a clip and builds a shareable collage — all on device.</string>
+    <string name="pick_videos">Choose videos</string>
+    <string name="cancel">Cancel</string>
+    <string name="close">Close</string>
+
+    <string name="chip_on_device">On device</string>
+    <string name="chip_no_upload">Nothing uploaded</string>
+
+    <string name="empty_title">No collages yet</string>
+    <string name="empty_hint">Pick one or more portrait clips. Each one gets its own collage, with every person shown exactly once.</string>
+    <string name="step_one">Choose up to %1$d clips from your gallery.</string>
+    <string name="step_two">Every face is detected, matched and ranked on your phone.</string>
+    <string name="step_three">Save or share the collage that comes out.</string>
+
+    <string name="collage_preview">Collage preview</string>
+    <string name="person_thumbnail">Representative shot</string>
+    <string name="people_header">People found</string>
+    <string name="on_screen_at">On screen at</string>
+    <string name="shot_quality">Why this shot won</string>
+    <string name="tap_to_close">tap to close</string>
+    <string name="save_to_gallery">Save</string>
+    <string name="share">Share</string>
+    <string name="share_chooser">Share collage</string>
+    <string name="saved_to_gallery">Saved to Pictures/VidCollage</string>
+    <string name="save_failed">Could not save the collage: %1$s</string>
+    <string name="storage_permission_needed">Storage access is needed to save into the gallery on this Android version.</string>
+
+    <string name="processing_status">%1$s</string>
+    <string name="percent_format">%1$d%%</string>
+    <string name="processing_subtext">%1$s · video %2$d of %3$d</string>
+    <string name="frames_analysed">%1$d frames</string>
+    <string name="best_shot_at">best shot at %1$s</string>
+    <string name="first_seen_at">first at %1$s</string>
+    <string name="person_content_description">%1$s, seen at %2$s</string>
+    <string name="processing_failed">%1$s failed: %2$s</string>
+    <string name="preview_caption">%1$s · %2$s</string>
+
+    <string name="quality_frontality">Facing camera</string>
+    <string name="quality_sharpness">Sharpness</string>
+    <string name="quality_eyes_open">Eyes open</string>
+    <string name="quality_smiling">Smiling</string>
+    <string name="quality_size">Face size</string>
+
+    <plurals name="people_count">
+        <item quantity="one">%d person</item>
+        <item quantity="other">%d people</item>
+    </plurals>
+    <plurals name="appearance_count">
+        <item quantity="one">%d appearance</item>
+        <item quantity="other">%d appearances</item>
+    </plurals>
+</resources>

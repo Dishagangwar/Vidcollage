@@ -1,0 +1,30 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="132dp"
+    android:viewportWidth="200"
+    android:viewportHeight="132">
+    <path
+        android:fillColor="?attr/colorSurfaceContainerHigh"
+        android:pathData="M18,14 L150,14 A12,12 0 0 1 162,26 L162,106 A12,12 0 0 1 150,118 L18,118 A12,12 0 0 1 6,106 L6,26 A12,12 0 0 1 18,14 Z" />
+    <path
+        android:fillColor="?attr/colorOutlineVariant"
+        android:pathData="M6,32 L162,32 L162,38 L6,38 Z M6,94 L162,94 L162,100 L6,100 Z" />
+    <path
+        android:fillColor="?attr/colorSurfaceContainer"
+        android:pathData="M16,20 L26,20 L26,28 L16,28 Z M40,20 L50,20 L50,28 L40,28 Z M64,20 L74,20 L74,28 L64,28 Z M88,20 L98,20 L98,28 L88,28 Z M112,20 L122,20 L122,28 L112,28 Z M136,20 L146,20 L146,28 L136,28 Z M16,104 L26,104 L26,112 L16,112 Z M40,104 L50,104 L50,112 L40,112 Z M64,104 L74,104 L74,112 L64,112 Z M88,104 L98,104 L98,112 L88,112 Z M112,104 L122,104 L122,112 L112,112 Z M136,104 L146,104 L146,112 L136,112 Z" />
+    <path
+        android:fillColor="?attr/colorPrimaryContainer"
+        android:pathData="M46,66 m-20,0 a20,20 0 1,0 40,0 a20,20 0 1,0 -40,0" />
+    <path
+        android:fillColor="?attr/colorTertiaryContainer"
+        android:pathData="M92,66 m-20,0 a20,20 0 1,0 40,0 a20,20 0 1,0 -40,0" />
+    <path
+        android:fillColor="?attr/colorSecondaryContainer"
+        android:pathData="M138,66 m-20,0 a20,20 0 1,0 40,0 a20,20 0 1,0 -40,0" />
+    <path
+        android:fillColor="?attr/colorPrimary"
+        android:pathData="M178,30 l4,-10 4,10 10,4 -10,4 -4,10 -4,-10 -10,-4 Z" />
+    <path
+        android:fillColor="?attr/colorSecondary"
+        android:pathData="M172,88 l3,-7 3,7 7,3 -7,3 -3,7 -3,-7 -7,-3 Z" />
+</vector>
