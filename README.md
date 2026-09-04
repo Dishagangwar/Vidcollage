@@ -5,12 +5,6 @@ person shown exactly once alongside how many times they appeared. Everything run
 detection, face embeddings, clustering, shot selection and rendering. There is no backend and no
 network call anywhere in the app.
 
-<p>
-<img src="docs/screenshot-home.png" width="240" alt="Home screen with the gradient hero and empty state">
-<img src="docs/screenshot-result.png" width="240" alt="Result card showing four people and the generated collage">
-<img src="docs/screenshot-dark.png" width="240" alt="The same result card in dark mode">
-</p>
-
 ## At a glance
 
 | | |
