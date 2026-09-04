@@ -5,18 +5,84 @@ person shown exactly once alongside how many times they appeared. Everything run
 detection, face embeddings, clustering, shot selection and rendering. There is no backend and no
 network call anywhere in the app.
 
-<img src="docs/screenshot-result.png" width="300" alt="Result screen showing three people and the generated collage">
+<p>
+<img src="docs/screenshot-home.png" width="240" alt="Home screen with the gradient hero and empty state">
+<img src="docs/screenshot-result.png" width="240" alt="Result card showing four people and the generated collage">
+<img src="docs/screenshot-dark.png" width="240" alt="The same result card in dark mode">
+</p>
 
-## Running it
+## At a glance
+
+| | |
+|---|---|
+| **Embedding model** | FaceNet (Inception-ResNet-v1), `app/src/main/assets/facenet.tflite` |
+| **Model input / output** | 160 × 160 × 3 float RGB → 128-D, L2-normalised |
+| **Model size** | 23,705,216 bytes (23.7 MB), bundled in the APK, memory-mapped at runtime |
+| **Face detection** | ML Kit `face-detection` 16.1.7, bundled — no Google Play services needed |
+| **Similarity metric** | Cosine similarity of unit-length embeddings (a plain dot product) |
+| **Identity threshold** | **`MERGE_SIMILARITY = 0.55`** — two clusters are the same person above this |
+| **Tracking threshold** | `MIN_SIMILARITY = 0.45` — a detection may continue an existing appearance above this |
+| **Language / UI** | Kotlin, XML views, Material 3, `minSdk 26`, `targetSdk 37` |
+
+Both thresholds are justified by measurement in [Choosing the similarity threshold](#choosing-the-similarity-threshold).
+
+## Build and setup
+
+### Prerequisites
+
+| | |
+|---|---|
+| **JDK** | 25 — pinned in `gradle/gradle-daemon-jvm.properties`. Gradle downloads a matching toolchain automatically if you do not have one. |
+| **Android SDK** | Platform **API 37** and platform-tools. Install via Android Studio's SDK Manager or `sdkmanager "platforms;android-37" "platform-tools"`. |
+| **Gradle / AGP** | Gradle 9.5 (via the committed wrapper — do not install it yourself) and AGP 9.3.2. |
+| **Device** | Any device or emulator on **API 26+**. Both face models ship inside the APK, so no Play services and no network are required. |
+
+### Point the build at your SDK
+
+`local.properties` is gitignored, so create it after cloning:
 
 ```bash
-./gradlew :app:installDebug
+echo "sdk.dir=$HOME/Library/Android/sdk" > local.properties   # macOS
+echo "sdk.dir=$HOME/Android/Sdk"        > local.properties   # Linux
 ```
 
-Kotlin, XML views, `minSdk 26`, `targetSdk 37`. Open the app, tap **Choose videos**, pick up to five
-clips, and each one gets its own card: the people it found, their appearance counts, the collage, and
-**Save** / **Share**. Saving writes to `Pictures/VidCollage/`; sharing goes through the standard
-Android share sheet via a `FileProvider`.
+Setting the `ANDROID_HOME` environment variable instead works just as well.
+
+### Build a debug APK
+
+```bash
+./gradlew :app:assembleDebug
+```
+
+The APK lands at:
+
+```
+app/build/outputs/apk/debug/app-debug.apk
+```
+
+### Build and install in one step
+
+```bash
+./gradlew :app:installDebug          # builds, installs on the connected device
+adb shell am start -n com.example.vidcollage/.MainActivity
+```
+
+Or install an APK you already have:
+
+```bash
+adb install -r app/build/outputs/apk/debug/app-debug.apk
+```
+
+No signing configuration is needed — the debug build uses the standard debug keystore, which Gradle
+creates on first use.
+
+### Using the app
+
+Tap **Choose videos**, pick up to five clips, and each one gets its own card: the people it found,
+their appearance counts, the collage, and **Save** / **Share**. Tap any face for a sheet showing
+every moment that person is on screen and why their shot was picked; tap the collage for a
+full-screen view. Saving writes to `Pictures/VidCollage/`; sharing goes through the standard Android
+share sheet via a `FileProvider`.
 
 ## How it works
 
@@ -54,21 +120,25 @@ ML Kit's roll angle), padded slightly past the detection box, and resized to the
 The crop is standardised per image ("prewhitening", the preprocessing FaceNet was trained with), and
 the resulting vector is L2-normalised so similarity is a plain dot product.
 
-**Model:** `app/src/main/assets/facenet.tflite` — Inception-ResNet-v1 FaceNet, 160×160×3 float input,
-128-D output, 23.7 MB, taken from
+**Model:** `app/src/main/assets/facenet.tflite` — Inception-ResNet-v1 FaceNet, **160×160×3 float
+input, 128-D output**, 23.7 MB, taken from
 [shubham0204/FaceRecognition_With_FaceNet_Android](https://github.com/shubham0204/FaceRecognition_With_FaceNet_Android)
-(Apache-2.0), itself a TFLite conversion of the Keras port of the original FaceNet weights. The input
-size and embedding length are read off the interpreter at runtime rather than hardcoded, so swapping
-in a different embedding network is a matter of replacing the asset.
+(Apache-2.0), itself a TFLite conversion of the Keras port of the original FaceNet weights.
+
+The interpreter runs with 4 threads, and the asset is memory-mapped rather than copied onto the heap
+(which is why `noCompress += "tflite"` is set in `app/build.gradle.kts` — a compressed asset cannot be
+mapped). The input size and embedding length are read off the interpreter at runtime rather than
+hardcoded, so swapping in a different embedding network is a matter of replacing the asset.
 
 ### 4. Group into appearances — `AppearanceTracker`
 
 An *appearance* is one continuous visible segment. ML Kit only issues tracking ids in stream mode, and
 we deliberately decode sampled frames instead of a live stream, so the association is done here: a
-detection continues an appearance when it looks like the same face (cosine similarity against the
-appearance's running centroid) in roughly the same place (box overlap and proximity), and the segment
-has not been silent for longer than `MAX_GAP_MS`. Matching is greedy on a combined affinity score, one
-detection per appearance per frame. Segments seen in only one frame are discarded as flicker.
+detection continues an appearance when it looks like the same face (cosine similarity ≥
+`MIN_SIMILARITY` against the appearance's running centroid) in roughly the same place (box overlap and
+proximity), and the segment has not been silent for longer than `MAX_GAP_MS`. Matching is greedy on a
+combined affinity score — 0.55 similarity, 0.25 overlap, 0.20 proximity — one detection per appearance
+per frame. Segments seen in only one frame are discarded as flicker.
 
 The 700 ms gap tolerance is what lets a blink, a brief occlusion, or a blurred pan sit *inside* one
 appearance rather than splitting it in two.
@@ -101,7 +171,7 @@ for the collage, so at most one crop per appearance is ever held). The weights:
 Two multiplicative penalties on top: **×0.55** when the face box runs into the frame border (cut-off
 face) and **×0.80** when another face is close enough to crowd into the tile. Both are penalties
 rather than hard rejections, so a person who is *only* ever clipped or *only* ever in a two-shot still
-gets a tile.
+gets a tile. This breakdown is what the per-person bottom sheet renders as bars.
 
 Because sharpness is measured on a fixed-size aligned crop, the number is comparable between a face
 filling the frame and one far away — which is what makes it usable both for scoring and as the blur
@@ -131,33 +201,60 @@ Every threshold lives in a named constant next to the code that uses it. The one
 | `MAX_BOX_CONTAINMENT` | 0.6 | `VideoProcessor` |
 | `MAX_GAP_MS` | 700 | `AppearanceTracker` |
 | `MIN_FRAMES` | 2 | `AppearanceTracker` |
-| `MERGE_SIMILARITY` | 0.55 | `FaceClusterer` |
+| `MIN_SIMILARITY` | 0.45 | `AppearanceTracker` |
+| `MIN_AFFINITY` | 0.45 | `AppearanceTracker` |
+| **`MERGE_SIMILARITY`** | **0.55** | **`FaceClusterer`** |
 
-The two least obvious ones were picked from measurements rather than guessed, and both measurements
-are kept as instrumented tests so they fail if the model or the preprocessing ever drifts:
+### Choosing the similarity threshold
 
-- **`MERGE_SIMILARITY`.** `EmbeddingSeparationTest` embeds two different photographs of each of three
-  people and reports the similarity matrix. Same-person pairs came out at **0.68 / 0.77 / 0.87**;
-  different-person pairs topped out at **0.29**. 0.55 sits in the middle of that gap, and these are
-  photographs taken years apart — frames from a single clip are a much easier case.
-- **`BLUR_FLOOR`.** `BlurGateTest` compares each crisp portrait against a 40 px horizontal smear of
-  itself, roughly one frame of a fast pan. Crisp faces measure **1123–2332**; the smeared versions
-  measure **34–75**. 80 rejects the smear with room to spare while leaving crisp faces untouched.
+`MERGE_SIMILARITY = 0.55` is the one number that decides whether two appearances are the same person,
+so it was picked from a measurement rather than guessed, and the measurement is kept as an instrumented
+test (`EmbeddingSeparationTest`) so it fails if the model or the preprocessing ever drifts.
+
+The test embeds two different photographs of each of three people and reports the full similarity
+matrix. Reproduce it with:
+
+```bash
+./gradlew :app:connectedDebugAndroidTest \
+  -Pandroid.testInstrumentationRunnerArguments.class=com.example.vidcollage.pipeline.EmbeddingSeparationTest
+adb logcat -d -s EmbeddingSeparation:I
+```
+
+Latest run on a Pixel 8a emulator:
+
+| Pair type | Similarities | Range |
+|---|---|---|
+| Same person | 0.682, 0.772, 0.871 | **0.68 – 0.87** |
+| Different people | −0.149 … 0.291 (12 pairs) | **≤ 0.29** |
+
+0.55 sits inside a gap running from 0.29 to 0.68: it clears the hardest different-person pair by 0.26
+and sits 0.13 below the weakest same-person pair. These are photographs of the same person taken years
+apart, which is a far harder case than two frames from a single clip — within one video the
+same-person similarities are higher still, so the practical margin is wider than the table suggests.
+
+`MIN_SIMILARITY = 0.45` is deliberately looser than `MERGE_SIMILARITY`: the tracker also has box
+overlap and proximity to lean on, and being slightly generous there is safe because clustering runs
+afterwards and can still merge two fragments of one person.
+
+`BLUR_FLOOR = 80` was calibrated the same way. `BlurGateTest` compares each crisp portrait against a
+40 px horizontal smear of itself, roughly one frame of a fast pan. Crisp faces measure **1123–2332**;
+the smeared versions measure **34–75**. 80 rejects the smear with room to spare while leaving crisp
+faces untouched.
 
 ## Tests
 
 ```bash
 ./gradlew :app:testDebugUnitTest          # 21 JVM tests
-./gradlew :app:connectedDebugAndroidTest  # needs a device or emulator with Google Play services
+./gradlew :app:connectedDebugAndroidTest  # 4 instrumented tests, needs a device or emulator
 ```
 
 **JVM** — the tracker's temporal logic (continuous segments, gap splitting, blink tolerance, two
 people in one frame, flicker rejection), the clusterer (merging, separation, the cannot-link
 constraint, ordering), the quality scoring, and the embedding vector maths.
 
-**Instrumented** — the two calibration tests above, a collage rendering test that checks every group
-size the grid has a case for, and `VideoPipelineEndToEndTest`, which runs the entire pipeline over a
-real clip. That test skips unless you supply one:
+**Instrumented** — the two calibration tests above and a collage rendering test that checks every
+group size the grid has a case for. A fourth, `VideoPipelineEndToEndTest`, runs the entire pipeline
+over a real clip and **skips unless you supply one**:
 
 ```bash
 adb push your_clip.mp4 /sdcard/Android/data/com.example.vidcollage/files/testclip.mp4
@@ -179,6 +276,20 @@ pass that decodes the stream once sequentially and keeps every *n*th frame. That
 would cut the dominant cost, but it is a decoder rewrite with real surface-format risk, and the brief
 asks to prioritise a working end-to-end flow — so it is written down here rather than half-built.
 
+## APK size
+
+The debug APK is ~80 MB, and all of it is models and native code:
+
+| Contents | Size |
+|---|---|
+| `assets/facenet.tflite` (stored uncompressed so it can be mapped) | 23.7 MB |
+| ML Kit bundled face detector, native libs × 4 ABIs | ~33 MB |
+| TensorFlow Lite native libs × 4 ABIs | ~15 MB |
+| Everything else (dex, resources) | ~16 MB |
+
+Nothing is downloaded at runtime, which is the trade being made. A release build with ABI splits or an
+App Bundle drops the per-device download to roughly a third, since only one ABI ships to each device.
+
 ## Known limitations
 
 - Faces that ML Kit cannot detect at all — extreme profiles, very small faces, heavy occlusion — are
@@ -188,9 +299,3 @@ asks to prioritise a working end-to-end flow — so it is written down here rath
 - Appearance counting is quantised to the 200 ms sampling grid: a segment shorter than ~400 ms can
   fall below the two-frame minimum and be dropped as flicker.
 - Results live in memory only; nothing is persisted across process death.
-
-## Credits
-
-The instrumented tests use six public-domain NASA portraits (two each of Sunita Williams, Jessica Meir
-and Victor Glover) from Wikimedia Commons, in `app/src/androidTest/assets/calibration/`. The FaceNet
-weights are Apache-2.0, credited in full above.
