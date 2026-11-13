@@ -155,12 +155,16 @@ private fun showPersonSheet(context: Context, person: Person) {
         context.getString(R.string.best_shot_at, formatTimestamp(person.shot.timestampMs)),
     ).joinToString(" · ")
 
+    val chipInflater = LayoutInflater.from(context)
     person.appearances.forEach { range ->
-        val chip = Chip(context).apply {
-            text = formatRange(range)
-            isClickable = false
-            isCheckable = false
-        }
+        // Inflated from a layout so the chip carries the app's chip style rather than the
+        // Material default, which does not match the stat chips on the result card.
+        val chip = chipInflater.inflate(
+            R.layout.item_time_chip,
+            binding.sheetTimestamps,
+            false,
+        ) as Chip
+        chip.text = formatRange(range)
         binding.sheetTimestamps.addView(chip)
     }
 

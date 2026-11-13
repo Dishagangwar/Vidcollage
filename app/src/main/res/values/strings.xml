@@ -9,6 +9,7 @@
     <string name="chip_no_upload">Nothing uploaded</string>
 
     <string name="empty_title">No collages yet</string>
+    <string name="how_it_works">How it works</string>
     <string name="empty_hint">Pick one or more portrait clips. Each one gets its own collage, with every person shown exactly once.</string>
     <string name="step_one">Choose up to %1$d clips from your gallery.</string>
     <string name="step_two">Every face is detected, matched and ranked on your phone.</string>

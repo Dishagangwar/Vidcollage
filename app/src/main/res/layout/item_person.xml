@@ -39,7 +39,7 @@
             android:paddingTop="2dp"
             android:paddingEnd="6dp"
             android:paddingBottom="2dp"
-            android:textAlignment="center"
+            android:gravity="center"
             android:textAppearance="?attr/textAppearanceLabelSmall"
             android:textColor="?attr/colorOnPrimary"
             tools:text="4" />

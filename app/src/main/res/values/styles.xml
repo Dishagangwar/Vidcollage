@@ -23,6 +23,16 @@
         <item name="cardBackgroundColor">?attr/colorSurfaceContainer</item>
     </style>
 
+    <!-- Quieter card for supporting content (the how-it-works panel), so it groups its rows
+         without competing with the result cards for attention. -->
+    <style name="Widget.Vidcollage.Card.Subtle" parent="Widget.Material3.CardView.Filled">
+        <item name="cardCornerRadius">24dp</item>
+        <item name="cardElevation">0dp</item>
+        <item name="cardBackgroundColor">?attr/colorSurfaceContainer</item>
+        <item name="strokeColor">?attr/colorOutlineVariant</item>
+        <item name="strokeWidth">1dp</item>
+    </style>
+
     <!-- One number-and-label pair in the result card header. -->
     <style name="Widget.Vidcollage.StatChip" parent="Widget.Material3.Chip.Assist">
         <item name="android:clickable">false</item>
@@ -35,6 +45,20 @@
         <item name="chipStrokeWidth">1dp</item>
         <item name="ensureMinTouchTargetSize">false</item>
         <item name="android:textColor">?attr/colorOnSurfaceVariant</item>
+    </style>
+
+    <!-- Headings inside cards and sheets. Small, tracked out and uppercase so they read as
+         structure rather than as another line of body copy. -->
+    <style name="TextAppearance.Vidcollage.SectionLabel" parent="TextAppearance.Material3.LabelMedium">
+        <item name="android:textAllCaps">true</item>
+        <item name="android:letterSpacing">0.09</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">?attr/colorOnSurfaceVariant</item>
+    </style>
+
+    <style name="TextAppearance.Vidcollage.EmptyTitle" parent="TextAppearance.Material3.HeadlineSmall">
+        <item name="android:textStyle">bold</item>
+        <item name="android:letterSpacing">-0.015</item>
     </style>
 
     <!-- Text on the gradient hero, which has its own fixed on-colour. -->
@@ -61,5 +85,30 @@
         <item name="elevation">4dp</item>
         <item name="iconGravity">textStart</item>
         <item name="iconPadding">10dp</item>
+    </style>
+
+    <!-- Save/share. Shared metrics so the pair sits as one control strip under the collage.
+         Save is outlined rather than tonal: this brand's secondaryContainer is a deep coral, and
+         a filled coral button next to Share reads as a destructive action. -->
+    <style name="Widget.Vidcollage.Button.Action" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="android:minHeight">52dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="cornerRadius">16dp</item>
+        <item name="strokeColor">?attr/colorOutlineVariant</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="iconGravity">textStart</item>
+        <item name="iconPadding">8dp</item>
+        <item name="iconSize">18dp</item>
+    </style>
+
+    <style name="Widget.Vidcollage.Button.Action.Filled" parent="Widget.Material3.Button">
+        <item name="android:minHeight">52dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="cornerRadius">16dp</item>
+        <item name="iconGravity">textStart</item>
+        <item name="iconPadding">8dp</item>
+        <item name="iconSize">18dp</item>
     </style>
 </resources>

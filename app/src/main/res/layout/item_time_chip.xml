@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Inflated per appearance in the person sheet. A layout rather than a bare `Chip(context)`
+     so the timestamps pick up the same treatment as the stat chips on the result card. -->
+<com.google.android.material.chip.Chip xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Widget.Vidcollage.StatChip"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    tools:text="0:07 – 0:12" />

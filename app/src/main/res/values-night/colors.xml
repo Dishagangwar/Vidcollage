@@ -7,4 +7,16 @@
     <color name="hero_on_gradient">#FFF6EDFF</color>
     <color name="hero_on_gradient_muted">#B3F6EDFF</color>
     <color name="hero_scrim">#4D000000</color>
+    <!-- Dimmer highlight: the same sheen that lifts the light hero blows out on a dark one. -->
+    <color name="hero_highlight">#24FFFFFF</color>
+    <color name="hero_highlight_fade">#00FFFFFF</color>
+    <!-- Muted mid-tones: the light pastels vanish on a dark surface and the saturated
+         container colours read as crude blocks. -->
+    <color name="illus_clip">#FF26242E</color>
+    <color name="illus_card">#FF33303D</color>
+    <color name="illus_line">#FF454152</color>
+    <color name="illus_hole">#FF191820</color>
+    <color name="illus_face_a">#FF7664C9</color>
+    <color name="illus_face_b">#FFB05F83</color>
+    <color name="illus_face_c">#FF43897B</color>
 </resources>
