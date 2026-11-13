@@ -1,22 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- One numbered "how it works" row on the empty state. -->
+<!-- One numbered "how it works" row on the empty state. Lives inside a panel, so it carries the
+     panel's horizontal padding itself. -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="center_vertical"
+    android:baselineAligned="false"
+    android:gravity="top"
     android:orientation="horizontal"
-    android:paddingTop="10dp"
-    android:paddingBottom="10dp">
+    android:paddingStart="20dp"
+    android:paddingTop="12dp"
+    android:paddingEnd="20dp"
+    android:paddingBottom="12dp">
 
     <TextView
         android:id="@+id/stepNumber"
-        android:layout_width="28dp"
-        android:layout_height="28dp"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
         android:background="@drawable/bg_step_number"
         android:gravity="center"
         android:textAppearance="?attr/textAppearanceLabelMedium"
         android:textColor="?attr/colorOnPrimaryContainer"
+        android:textStyle="bold"
         tools:text="1" />
 
     <TextView
@@ -25,6 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="14dp"
         android:layout_weight="1"
+        android:lineSpacingMultiplier="1.1"
         android:textAppearance="?attr/textAppearanceBodyMedium"
         tools:text="Pick one or more clips." />
 </LinearLayout>

@@ -1,30 +1,64 @@
+<!-- Empty-state art: a clip on the left resolving into a collage card on the right, which is
+     the one sentence this app does. Theme attrs throughout so it recolours in dark mode. -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="200dp"
-    android:height="132dp"
-    android:viewportWidth="200"
-    android:viewportHeight="132">
+    android:width="216dp"
+    android:height="143dp"
+    android:viewportWidth="216"
+    android:viewportHeight="143">
+
+    <!-- Source clip -->
     <path
-        android:fillColor="?attr/colorSurfaceContainerHigh"
-        android:pathData="M18,14 L150,14 A12,12 0 0 1 162,26 L162,106 A12,12 0 0 1 150,118 L18,118 A12,12 0 0 1 6,106 L6,26 A12,12 0 0 1 18,14 Z" />
+        android:fillColor="@color/illus_clip"
+        android:pathData="M18,22 L98,22 A12,12 0 0 1 110,34 L110,110 A12,12 0 0 1 98,122 L18,122 A12,12 0 0 1 6,110 L6,34 A12,12 0 0 1 18,22 Z" />
     <path
-        android:fillColor="?attr/colorOutlineVariant"
-        android:pathData="M6,32 L162,32 L162,38 L6,38 Z M6,94 L162,94 L162,100 L6,100 Z" />
+        android:fillColor="@color/illus_line"
+        android:pathData="M6,42 L110,42 L110,47 L6,47 Z M6,97 L110,97 L110,102 L6,102 Z" />
     <path
-        android:fillColor="?attr/colorSurfaceContainer"
-        android:pathData="M16,20 L26,20 L26,28 L16,28 Z M40,20 L50,20 L50,28 L40,28 Z M64,20 L74,20 L74,28 L64,28 Z M88,20 L98,20 L98,28 L88,28 Z M112,20 L122,20 L122,28 L112,28 Z M136,20 L146,20 L146,28 L136,28 Z M16,104 L26,104 L26,112 L16,112 Z M40,104 L50,104 L50,112 L40,112 Z M64,104 L74,104 L74,112 L64,112 Z M88,104 L98,104 L98,112 L88,112 Z M112,104 L122,104 L122,112 L112,112 Z M136,104 L146,104 L146,112 L136,112 Z" />
+        android:fillColor="@color/illus_hole"
+        android:pathData="M15,31 L20,31 A2,2 0 0 1 22,33 L22,36 A2,2 0 0 1 20,38 L15,38 A2,2 0 0 1 13,36 L13,33 A2,2 0 0 1 15,31 Z M33,31 L38,31 A2,2 0 0 1 40,33 L40,36 A2,2 0 0 1 38,38 L33,38 A2,2 0 0 1 31,36 L31,33 A2,2 0 0 1 33,31 Z M51,31 L56,31 A2,2 0 0 1 58,33 L58,36 A2,2 0 0 1 56,38 L51,38 A2,2 0 0 1 49,36 L49,33 A2,2 0 0 1 51,31 Z M69,31 L74,31 A2,2 0 0 1 76,33 L76,36 A2,2 0 0 1 74,38 L69,38 A2,2 0 0 1 67,36 L67,33 A2,2 0 0 1 69,31 Z M87,31 L92,31 A2,2 0 0 1 94,33 L94,36 A2,2 0 0 1 92,38 L87,38 A2,2 0 0 1 85,36 L85,33 A2,2 0 0 1 87,31 Z M15,115 L20,115 A2,2 0 0 1 22,117 L22,120 A2,2 0 0 1 20,122 L15,122 A2,2 0 0 1 13,120 L13,117 A2,2 0 0 1 15,115 Z M33,115 L38,115 A2,2 0 0 1 40,117 L40,120 A2,2 0 0 1 38,122 L33,122 A2,2 0 0 1 31,120 L31,117 A2,2 0 0 1 33,115 Z M51,115 L56,115 A2,2 0 0 1 58,117 L58,120 A2,2 0 0 1 56,122 L51,122 A2,2 0 0 1 49,120 L49,117 A2,2 0 0 1 51,115 Z M69,115 L74,115 A2,2 0 0 1 76,117 L76,120 A2,2 0 0 1 74,122 L69,122 A2,2 0 0 1 67,120 L67,117 A2,2 0 0 1 69,115 Z M87,115 L92,115 A2,2 0 0 1 94,117 L94,120 A2,2 0 0 1 92,122 L87,122 A2,2 0 0 1 85,120 L85,117 A2,2 0 0 1 87,115 Z" />
+
+    <!-- Faces in the clip, deliberately unequal: the app keeps one shot per person. -->
     <path
-        android:fillColor="?attr/colorPrimaryContainer"
-        android:pathData="M46,66 m-20,0 a20,20 0 1,0 40,0 a20,20 0 1,0 -40,0" />
+        android:fillColor="@color/illus_face_a"
+        android:pathData="M33,70 m-15,0 a15,15 0 1,0 30,0 a15,15 0 1,0 -30,0 Z" />
     <path
-        android:fillColor="?attr/colorTertiaryContainer"
-        android:pathData="M92,66 m-20,0 a20,20 0 1,0 40,0 a20,20 0 1,0 -40,0" />
+        android:fillColor="@color/illus_face_c"
+        android:pathData="M63,70 m-12,0 a12,12 0 1,0 24,0 a12,12 0 1,0 -24,0 Z" />
     <path
-        android:fillColor="?attr/colorSecondaryContainer"
-        android:pathData="M138,66 m-20,0 a20,20 0 1,0 40,0 a20,20 0 1,0 -40,0" />
+        android:fillColor="@color/illus_face_b"
+        android:pathData="M89,70 m-10,0 a10,10 0 1,0 20,0 a10,10 0 1,0 -20,0 Z" />
+
+    <!-- Output collage, tilted so it reads as a separate sheet laid on top of the clip. -->
+    <group
+        android:pivotX="161"
+        android:pivotY="72"
+        android:rotation="4">
+        <path
+            android:fillColor="@color/illus_card"
+            android:pathData="M130,18 L192,18 A14,14 0 0 1 206,32 L206,112 A14,14 0 0 1 192,126 L130,126 A14,14 0 0 1 116,112 L116,32 A14,14 0 0 1 130,18 Z"
+            android:strokeColor="@color/illus_line"
+            android:strokeWidth="2" />
+        <path
+            android:fillColor="@color/illus_line"
+            android:pathData="M128.5,30 L167.5,30 A2.5,2.5 0 0 1 170,32.5 L170,32.5 A2.5,2.5 0 0 1 167.5,35 L128.5,35 A2.5,2.5 0 0 1 126,32.5 L126,32.5 A2.5,2.5 0 0 1 128.5,30 Z" />
+        <path
+            android:fillColor="@color/illus_face_a"
+            android:pathData="M134,44 L151,44 A8,8 0 0 1 159,52 L159,68 A8,8 0 0 1 151,76 L134,76 A8,8 0 0 1 126,68 L126,52 A8,8 0 0 1 134,44 Z" />
+        <path
+            android:fillColor="@color/illus_face_b"
+            android:pathData="M171,44 L188,44 A8,8 0 0 1 196,52 L196,68 A8,8 0 0 1 188,76 L171,76 A8,8 0 0 1 163,68 L163,52 A8,8 0 0 1 171,44 Z" />
+        <path
+            android:fillColor="@color/illus_face_c"
+            android:pathData="M134,80 L151,80 A8,8 0 0 1 159,88 L159,104 A8,8 0 0 1 151,112 L134,112 A8,8 0 0 1 126,104 L126,88 A8,8 0 0 1 134,80 Z" />
+        <path
+            android:fillColor="@color/illus_face_a"
+            android:pathData="M171,80 L188,80 A8,8 0 0 1 196,88 L196,104 A8,8 0 0 1 188,112 L171,112 A8,8 0 0 1 163,104 L163,88 A8,8 0 0 1 171,80 Z" />
+    </group>
+
     <path
         android:fillColor="?attr/colorPrimary"
-        android:pathData="M178,30 l4,-10 4,10 10,4 -10,4 -4,10 -4,-10 -10,-4 Z" />
+        android:pathData="M198,10 Q200.2,17.8 208,20 Q200.2,22.2 198,30 Q195.8,22.2 188,20 Q195.8,17.8 198,10 Z" />
     <path
         android:fillColor="?attr/colorSecondary"
-        android:pathData="M172,88 l3,-7 3,7 7,3 -7,3 -3,7 -3,-7 -7,-3 Z" />
+        android:pathData="M15,123 Q16.54,128.46 22,130 Q16.54,131.54 15,137 Q13.46,131.54 8,130 Q13.46,128.46 15,123 Z" />
 </vector>
