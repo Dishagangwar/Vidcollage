@@ -1,13 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="rectangle">
-    <gradient
-        android:angle="315"
-        android:startColor="@color/hero_gradient_start"
-        android:centerColor="@color/hero_gradient_center"
-        android:endColor="@color/hero_gradient_end"
-        android:type="linear" />
-    <corners
-        android:bottomLeftRadius="32dp"
-        android:bottomRightRadius="32dp" />
-</shape>
+<!-- Two layers: the brand diagonal, plus a soft highlight bloomed from the top-left corner.
+     A single linear gradient reads flat at this size; the second pass gives the hero depth. -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="315"
+                android:startColor="@color/hero_gradient_start"
+                android:centerColor="@color/hero_gradient_center"
+                android:endColor="@color/hero_gradient_end"
+                android:type="linear" />
+            <corners
+                android:bottomLeftRadius="32dp"
+                android:bottomRightRadius="32dp" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:centerX="0.1"
+                android:centerY="0.0"
+                android:endColor="@color/hero_highlight_fade"
+                android:gradientRadius="85%p"
+                android:startColor="@color/hero_highlight"
+                android:type="radial" />
+            <corners
+                android:bottomLeftRadius="32dp"
+                android:bottomRightRadius="32dp" />
+        </shape>
+    </item>
+</layer-list>

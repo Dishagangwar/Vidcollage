@@ -61,4 +61,18 @@
     <color name="hero_on_gradient">#FFFFFFFF</color>
     <color name="hero_on_gradient_muted">#CCFFFFFF</color>
     <color name="hero_scrim">#33000000</color>
+    <!-- Soft top-left highlight layered over the hero so the gradient has depth instead of
+         reading as one flat diagonal wash. -->
+    <color name="hero_highlight">#3DFFFFFF</color>
+    <color name="hero_highlight_fade">#00FFFFFF</color>
+    <!-- Empty-state illustration. Its own tokens rather than theme containers: the container
+         roles invert in dark mode, which put the output card *behind* the clip, and the
+         container hues come out fully saturated there instead of as soft pastel faces. -->
+    <color name="illus_clip">#FFEBE5F4</color>
+    <color name="illus_card">#FFF7F4FC</color>
+    <color name="illus_line">#FFD3CCE0</color>
+    <color name="illus_hole">#FFF9F7FD</color>
+    <color name="illus_face_a">#FFD9CEFF</color>
+    <color name="illus_face_b">#FFFFD0E1</color>
+    <color name="illus_face_c">#FFB2EEDC</color>
 </resources>
