@@ -16,7 +16,7 @@
         android:layout_height="4dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="20dp"
-        android:background="@drawable/bg_stage_dot_idle" />
+        android:background="@drawable/bg_drag_handle" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -47,6 +47,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?attr/textAppearanceHeadlineSmall"
+                android:textStyle="bold"
                 tools:text="Person 1" />
 
             <TextView
@@ -65,23 +66,22 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="@string/on_screen_at"
-        android:textAppearance="?attr/textAppearanceLabelLarge"
-        android:textColor="?android:attr/textColorSecondary" />
+        android:textAppearance="@style/TextAppearance.Vidcollage.SectionLabel" />
 
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/sheetTimestamps"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        app:chipSpacingVertical="2dp" />
+        app:chipSpacingHorizontal="6dp"
+        app:chipSpacingVertical="4dp" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="@string/shot_quality"
-        android:textAppearance="?attr/textAppearanceLabelLarge"
-        android:textColor="?android:attr/textColorSecondary" />
+        android:textAppearance="@style/TextAppearance.Vidcollage.SectionLabel" />
 
     <!-- Populated in code, one bar per component of the quality score. -->
     <LinearLayout
